@@ -7,9 +7,11 @@
 - Python 3.9+
 - 有效 `AUTH_HEADER`
 
+英文文档：参见 [README.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/python/README.md)。
+
 ## 安装与运行
 ```bash
-cd examples/python
+cd python
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 AUTH_HEADER='Bearer YOUR_TOKEN' python main.py

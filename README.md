@@ -14,7 +14,7 @@ Each client includes:
 - Simple retry for 429/5xx
 - Batch submit to `/api/v2/submit-batch`
 
-Chinese documentation: see `README.zh.md`.
+Chinese documentation: see [README.zh.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/README.zh.md).
 
 ## Quick Start
 - NodeJS

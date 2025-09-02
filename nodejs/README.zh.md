@@ -7,9 +7,11 @@
 - Node.js >= 18
 - 有效 `AUTH_HEADER`
 
+英文文档：参见 [README.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/nodejs/README.md)。
+
 ## 安装与运行
 ```bash
-cd examples/nodejs
+cd nodejs
 npm i
 AUTH_HEADER='Bearer YOUR_TOKEN' node index.js
 ```

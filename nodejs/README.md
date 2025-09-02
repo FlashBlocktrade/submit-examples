@@ -7,9 +7,11 @@
 - Node.js >= 18
 - Valid `AUTH_HEADER`
 
+Chinese documentation: see [README.zh.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/nodejs/README.zh.md).
+
 ## Install & Run
 ```bash
-cd examples/nodejs
+cd nodejs
 npm i
 AUTH_HEADER='Bearer YOUR_TOKEN' node index.js
 ```

@@ -7,9 +7,11 @@
 - Go 1.21+
 - 有效 `AUTH_HEADER`
 
+英文文档：参见 [README.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/go/README.md)。
+
 ## 运行
 ```bash
-cd examples/go
+cd go
 AUTH_HEADER='Bearer YOUR_TOKEN' go run .
 ```
 

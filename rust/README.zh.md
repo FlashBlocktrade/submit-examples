@@ -7,9 +7,11 @@
 - Rust（stable）
 - 有效 `AUTH_HEADER`
 
+英文文档：参见 [README.md](https://github.com/FlashBlocktrade/submit-examples/blob/main/rust/README.md)。
+
 ## 运行
 ```bash
-cd examples/rust
+cd rust
 AUTH_HEADER='Bearer YOUR_TOKEN' cargo run
 ```
 
