@@ -1,15 +1,32 @@
-# Flashblock Examples
+# Flashblock Submit Examples
 
-The `examples` directory is the primary source for ready-to-run clients.
+Ready-to-run clients for Flashblock batch submit API in multiple languages.
 
 Current structure:
-- NodeJS: `examples/nodejs`
+- NodeJS: `nodejs/`
+- Python: `python/`
+- Rust: `rust/`
+- Go: `go/`
 
-See the per-language README for installation and run instructions.
+Each client includes:
+- Endpoint selection (ping root URL)
+- HTTP Keep-Alive
+- Simple retry for 429/5xx
+- Batch submit to `/api/v2/submit-batch`
 
 Chinese documentation: see `README.zh.md`.
 
 ## Quick Start
-- NodeJS: `npm run example:node`
+- NodeJS
+  - `cd nodejs && npm i`
+  - `AUTH_HEADER='Bearer YOUR_TOKEN' node index.js`
+- Python
+  - `cd python && python3 -m venv .venv && . .venv/bin/activate`
+  - `pip install -r requirements.txt`
+  - `AUTH_HEADER='Bearer YOUR_TOKEN' python main.py`
+- Rust
+  - `cd rust && AUTH_HEADER='Bearer YOUR_TOKEN' cargo run`
+- Go
+  - `cd go && AUTH_HEADER='Bearer YOUR_TOKEN' go run .`
 
-Environment variable `AUTH_HEADER` must be set before running.
+Note: set environment variable `AUTH_HEADER` before running.
