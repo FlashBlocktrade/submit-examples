@@ -1,5 +1,5 @@
 // English: Minimal Rust client using reqwest; includes endpoint selection, Keep-Alive, retry, batch submit.
-// 中文：最小化的 Rust 客户端（reqwest），包含端点选择、Keep-Alive、自动重试与批量提交。
+// 中文：最小化的 Rust 用戶端（reqwest），包含端點選擇、Keep-Alive、自動重試與批次提交。
 use reqwest::{Client, StatusCode};
 use serde_json::Value;
 use std::time::Instant;
@@ -8,7 +8,7 @@ use std::time::Instant;
 pub struct Endpoint { pub name: &'static str, pub base: &'static str }
 
 // English: Public endpoints; modify as needed.
-// 中文：公开端点列表；可按需调整。
+// 中文：公開端點清單；可按需調整。
 pub static ENDPOINTS: &[Endpoint] = &[
     Endpoint { name: "ny", base: "http://ny.flashblock.trade" },
     Endpoint { name: "slc", base: "http://slc.flashblock.trade" },
@@ -19,7 +19,7 @@ pub static ENDPOINTS: &[Endpoint] = &[
 ];
 
 // English: Ping the root; success if HTTP 2xx.
-// 中文：Ping 根路径；2xx 视为可用。
+// 中文：Ping 根路徑；2xx 視為可用。
 async fn ping(client: &Client, ep: &Endpoint) -> (Endpoint, bool, u128) {
     let url = ep.base.to_string();
     let t0 = Instant::now();
@@ -28,7 +28,7 @@ async fn ping(client: &Client, ep: &Endpoint) -> (Endpoint, bool, u128) {
 }
 
 // English: Select fastest healthy endpoint (fallback to lowest latency).
-// 中文：选择最快可用端点（或退化为最低延迟）。
+// 中文：選擇最快可用端點（或退化為最低延遲）。
 async fn select_best_endpoint(client: &Client) -> Endpoint {
     let futs = ENDPOINTS.iter().map(|e| ping(client, e));
     let results = futures::future::join_all(futs).await;
@@ -43,7 +43,7 @@ async fn select_best_endpoint(client: &Client) -> Endpoint {
 }
 
 // English: Parse response and extract signatures from top-level or data.signatures.
-// 中文：解析响应，兼容顶层或 data.signatures 的签名字段。
+// 中文：解析回應，相容頂層或 data.signatures 的簽名字段。
 fn extract_signatures(v: &Value) -> (bool, i64, String, Vec<String>) {
     let top = v.get("data").unwrap_or(v);
     let success = top.get("success").and_then(|x| x.as_bool()).unwrap_or(false);
@@ -64,7 +64,7 @@ fn extract_signatures(v: &Value) -> (bool, i64, String, Vec<String>) {
 }
 
 // English: Convenience function; retry once on transport error.
-// 中文：便捷方法；传输错误时重选端点再试一次。
+// 中文：便捷方法；傳輸錯誤時重選端點再試一次。
 pub async fn run(auth_header: &str, transactions: Vec<String>) -> anyhow::Result<()> {
     let client = Client::builder()
         .pool_max_idle_per_host(64)

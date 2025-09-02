@@ -1,11 +1,11 @@
 # English: Minimal Python client using httpx with endpoint selection, Keep-Alive, retry, and batch submit.
-# 中文：最小化的 Python 客户端（httpx），包含端点选择、Keep-Alive、自动重试与批量提交。
+# 中文：最小化的 Python 用戶端（httpx），包含端點選擇、Keep-Alive、自動重試與批次提交。
 import asyncio
 import time
 import httpx
 
 # English: Public endpoints; modify as needed.
-# 中文：公开端点列表；可按需调整。
+# 中文：公開端點清單；可按需調整。
 ENDPOINTS = [
     {"name": "ny", "baseUrl": "http://ny.flashblock.trade"},
     {"name": "slc", "baseUrl": "http://slc.flashblock.trade"},
@@ -16,7 +16,7 @@ ENDPOINTS = [
 ]
 
 # English: Ping root; success if 2xx.
-# 中文：Ping 根路径；2xx 视为成功。
+# 中文：Ping 根路徑；2xx 視為成功。
 async def ping(client: httpx.AsyncClient, ep):
     t0 = time.monotonic()
     try:
@@ -28,7 +28,7 @@ async def ping(client: httpx.AsyncClient, ep):
     return {"ep": ep, "ok": ok, "ms": ms}
 
 # English: Select fastest healthy endpoint (fallback to lowest latency).
-# 中文：选择最快可用端点（或退化为最低延迟）。
+# 中文：選擇最快可用端點（或退化為最低延遲）。
 async def select_best_endpoint(client: httpx.AsyncClient):
     rs = await asyncio.gather(*[ping(client, ep) for ep in ENDPOINTS])
     healthy = [r for r in rs if r["ok"]]
@@ -37,7 +37,7 @@ async def select_best_endpoint(client: httpx.AsyncClient):
     return lst[0]["ep"]
 
 # English: Submit with simple retry for 429/5xx.
-# 中文：提交时对 429/5xx 做简单重试。
+# 中文：提交時對 429/5xx 做簡單重試。
 async def submit_batch(client: httpx.AsyncClient, base_url: str, auth_header: str, txs):
     url = f"{base_url}/api/v2/submit-batch"
     attempts = 0
@@ -60,8 +60,8 @@ if __name__ == "__main__":
 
 # English: Convenience function (same behavior as other languages);
 # - preferred endpoint name optional; retry once on transport error.
-# 中文：便捷方法（与其他语言一致）；
-# - 可选指定首选端点名；传输错误时重选端点再试一次。
+# 中文：便捷方法（與其他語言一致）；
+# - 可選指定首選端點名；傳輸錯誤時重選端點再試一次。
 async def flashblock_sendTransactions(auth_header: str, transactions, preferred: str | None = None):
     if not auth_header:
         raise ValueError("auth_header required")

@@ -1,3 +1,11 @@
+"""
+English: Demo entry for Python — calls flashblock_sendTransactions and prints result.
+中文：Python 演示入口——调用 flashblock_sendTransactions 并打印结果。
+Usage/用法:
+  AUTH_HEADER='Bearer YOUR_TOKEN' python main.py
+Optional preferred endpoint/可选首选端点:
+  修改调用传入第三参数，如 preferred='fra'
+"""
 import asyncio
 import os
 from typing import List

@@ -1,5 +1,9 @@
 package main
 
+// English: Demo entry for Go — calls FlashblockSendTransactions and prints result.
+// 中文：Go 示範入口——呼叫 FlashblockSendTransactions 並列印結果。
+// Usage/用法:
+//   AUTH_HEADER='Bearer YOUR_TOKEN' go run .
 import (
     "fmt"
     "os"

@@ -1,7 +1,7 @@
 package main
 
 // English: Minimal Go client with endpoint selection, Keep-Alive, retry, and batch submit.
-// 中文：最小化的 Go 客户端，包含端点选择、Keep-Alive、自动重试与批量提交。
+// 中文：最小化的 Go 用戶端，包含端點選擇、Keep-Alive、自動重試與批次提交。
 
 import (
     "bytes"
@@ -14,7 +14,7 @@ import (
 )
 
 // English: Public endpoints; modify as needed.
-// 中文：公开端点列表；可按需调整。
+// 中文：公開端點清單；可按需調整。
 type Endpoint struct {
     Name    string
     BaseURL string
@@ -30,7 +30,7 @@ var endpoints = []Endpoint{
 }
 
 // English: Reusable HTTP client with Keep-Alive.
-// 中文：复用 HTTP 客户端并启用 Keep-Alive。
+// 中文：重複使用 HTTP 用戶端並啟用 Keep-Alive。
 var httpClient = &http.Client{
     Timeout: 10 * time.Second,
     Transport: &http.Transport{
@@ -45,7 +45,7 @@ var httpClient = &http.Client{
 type pingRes struct { EP Endpoint; OK bool; MS int64 }
 
 // English: Ping root; success if 2xx.
-// 中文：Ping 根路径；2xx 视为可用。
+// 中文：Ping 根路徑；2xx 視為可用。
 func ping(ep Endpoint) pingRes {
     url := ep.BaseURL
     t0 := time.Now()
@@ -60,7 +60,7 @@ func ping(ep Endpoint) pingRes {
 }
 
 // English: Select fastest healthy endpoint (fallback to lowest latency).
-// 中文：选择最快可用端点（或退化为最低延迟）。
+// 中文：選擇最快可用端點（或退化為最低延遲）。
 func selectBestEndpoint(preferred string) Endpoint {
     if preferred != "" {
         for _, ep := range endpoints { if ep.Name == preferred { return ep } }
@@ -78,7 +78,7 @@ func selectBestEndpoint(preferred string) Endpoint {
 }
 
 // English: HTTP submit with simple retry for 429/5xx.
-// 中文：POST 提交；对 429/5xx 进行简单重试。
+// 中文：POST 提交；對 429/5xx 進行簡單重試。
 type submitResp struct { Status int; Data map[string]any }
 
 func submitBatch(baseURL, auth string, txs []string) (submitResp, error) {
@@ -100,7 +100,7 @@ func submitBatch(baseURL, auth string, txs []string) (submitResp, error) {
 }
 
 // English: Extract signatures from top-level or data.signatures.
-// 中文：从顶层或 data.signatures 中解析签名。
+// 中文：從頂層或 data.signatures 中解析簽名。
 func extractSignatures(raw map[string]any) (bool, int64, string, []string) {
     top, ok := raw["data"].(map[string]any); if !ok { top = raw }
     success, _ := top["success"].(bool)
@@ -117,7 +117,7 @@ func extractSignatures(raw map[string]any) (bool, int64, string, []string) {
 }
 
 // English: Public result shape for convenience method.
-// 中文：便捷方法的统一返回结构。
+// 中文：便捷方法的統一回傳結構。
 type Result struct {
     Status     int
     Success    bool
@@ -130,7 +130,7 @@ type Result struct {
 }
 
 // English: Convenience method; retry once on transport error.
-// 中文：便捷方法；发生传输错误时重选端点再试一次。
+// 中文：便捷方法；發生傳輸錯誤時重選端點再試一次。
 func FlashblockSendTransactions(auth string, txs []string, preferred string) (Result, error) {
     ep := selectBestEndpoint(preferred)
     t0 := time.Now()
