@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flashblock-submit-example"
+version = "0.1.0"
+description = "FlashBlock submit example (Python)"
+authors = [{ name = "FlashBlock" }]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "httpx==0.23.3",
+  "solana==0.29.2",
+  "solders==0.14.4",
+  "base58==2.1.1",
+]
+
+[project.scripts]
+flashblock-submit = "main:run"
+
+[tool.setuptools]
+py-modules = ["main", "flashblock_sendTransactions"]
